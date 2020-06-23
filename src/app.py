@@ -7,4 +7,4 @@ def test():
 
 # Actual App logic goes in this main function. Like all the options to choose from algorithms input outputs etc.
 def main():
-    fcfs.run()
+    fcfs.run([1])

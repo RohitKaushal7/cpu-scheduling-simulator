@@ -12,5 +12,6 @@ Python project to simulate cpu-scheduling
 3. Activate virtual env.
     - `source env/bin/activate`
     - when you are done doing stuff you can deactivate virtual env writing directly `deactivate`
+4.  install dependencies and setup tools. `pip install -e .` 
 
-4. Do stuff.
+5. Do stuff.
