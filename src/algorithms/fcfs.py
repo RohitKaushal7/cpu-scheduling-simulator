@@ -1,4 +1,5 @@
 # when imported as module.
+import src.utils.graph as graph
 from src.utils.tmp import processes
 import src.utils.table as table
 
@@ -43,6 +44,7 @@ def run(processes):
         total_return_time += proc[i].burst_time
 
     return {
+        'name': 'FCFS',
         'avg_waiting_time': total_waiting_time/len(proc),
         'avg_response_time': total_response_time/len(proc),
         'avg_turnaround_time': total_turnaround_time/len(proc),
@@ -57,6 +59,8 @@ def main():
     print("Avg Turnaround Time: {}".format(result['avg_turnaround_time']))
     print("Avg Response Time: {}".format(result['avg_response_time']))
     table.plot(result['processes'])
+    graph.plot_algo_graph(result)
+    # graph.plot_comparision([result, result, result])
 
 
 if __name__ == '__main__':
