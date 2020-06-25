@@ -40,10 +40,10 @@ def run(processes):
     
   
     # update total
-    total_response_time = proc[0].response_time
-    total_waiting_time = proc[0].waiting_time
-    total_turnaround_time = proc[0].turnaround_time
-    total_return_time = proc[0].burst_time
+    total_response_time += proc[0].response_time
+    total_waiting_time += proc[0].waiting_time
+    total_turnaround_time += proc[0].turnaround_time
+    total_return_time += proc[0].burst_time
 
     # calculate for next processes
     for i in range(1, len(proc)):

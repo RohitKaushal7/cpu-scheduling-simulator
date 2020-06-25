@@ -1,17 +1,4 @@
 # when imported as module.
-def run():
-    # will expect some arguments and run the scheduling
-    print('Running FCFS')
-
-
-# If this file is executed directly
-def main():
-    print('this file is executed directly.')
-
-
-if __name__ == '__main__':
-    main()
-# when imported as module.
 from src.utils.tmp import processes
 import src.utils.table as table
 
@@ -36,10 +23,10 @@ def run(processes):
     proc[0].waiting_time = 0
 
     # update total
-    total_response_time = proc[0].response_time
-    total_waiting_time = proc[0].waiting_time
-    total_turnaround_time = proc[0].turnaround_time
-    total_return_time = proc[0].burst_time
+    total_response_time += proc[0].response_time
+    total_waiting_time += proc[0].waiting_time
+    total_turnaround_time += proc[0].turnaround_time
+    total_return_time += proc[0].burst_time
 
     # calculate for next processes
     for i in range(1, len(proc)):
