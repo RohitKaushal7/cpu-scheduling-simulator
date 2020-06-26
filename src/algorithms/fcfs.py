@@ -17,8 +17,7 @@ def run(processes):
 
     # run the first process
     proc[0].return_time = proc[0].burst_time
-    proc[0].turnaround_time = proc[0].return_time - \
-        proc[0].arrival_time
+    proc[0].turnaround_time = proc[0].return_time - proc[0].arrival_time
     proc[0].response_time = 0
     proc[0].waiting_time = 0
 
@@ -31,10 +30,10 @@ def run(processes):
     # calculate for next processes
     for i in range(1, len(proc)):
         # calc for each
+        proc[i].response_time = total_return_time - proc[i].arrival_time
         proc[i].waiting_time = total_return_time - proc[i].arrival_time
         proc[i].return_time = total_return_time + proc[i].burst_time
-        proc[i].turnaround_time = proc[i].return_time + proc[i].arrival_time
-        proc[i].response_time = total_return_time - proc[i].arrival_time
+        proc[i].turnaround_time = proc[i].return_time - proc[i].arrival_time
 
         # update total
         total_response_time += proc[i].response_time
@@ -43,6 +42,7 @@ def run(processes):
         total_return_time += proc[i].burst_time
 
     return {
+        'name': 'FCFS',
         'avg_waiting_time': total_waiting_time/len(proc),
         'avg_response_time': total_response_time/len(proc),
         'avg_turnaround_time': total_turnaround_time/len(proc),

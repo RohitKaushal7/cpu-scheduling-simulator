@@ -3,7 +3,10 @@ import random
 
 processes = []
 
-for i in range(20):
-    p = Process(i, random.randint(1, 50),
-                random.randint(1, 50), random.randint(0, 5))
+# first process must arrive at time 0
+processes.append(Process(0, 0, random.randint(1, 5), random.randint(0, 5)))
+
+for i in range(1, 5):
+    p = Process(i, random.randint(1, 5),
+                random.randint(1, 5), random.randint(0, 5))
     processes.append(p)
