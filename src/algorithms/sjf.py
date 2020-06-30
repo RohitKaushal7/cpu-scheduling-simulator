@@ -1,10 +1,13 @@
 # when imported as module.
 from src.utils.tmp import processes
 import src.utils.table as table
+import src.utils.graph as graph
 
 
 def run(processes):
     # expects array of processes as arguments -> run the scheduling -> returns a dictionary/object of the result.
+
+    gantt = []
 
     # initialize
     total_waiting_time = 0
@@ -20,6 +23,8 @@ def run(processes):
     proc[0].turnaround_time = proc[0].return_time - proc[0].arrival_time
     proc[0].response_time = 0
     proc[0].waiting_time = 0
+
+    gantt.append((proc[0].p_id, (total_return_time, proc[0].burst_time)))
 
     # update total
     total_response_time += proc[0].response_time
@@ -42,6 +47,10 @@ def run(processes):
         proc[val].turnaround_time = proc[val].return_time - \
             proc[val].arrival_time
         proc[val].waiting_time = proc[val].turnaround_time - proc[val].burst_time
+
+        gantt.append(
+            (proc[val].p_id, (total_return_time, proc[val].burst_time)))
+
         proc[i], proc[val] = proc[val], proc[i]
 
         # update total
@@ -57,7 +66,8 @@ def run(processes):
         'avg_waiting_time': total_waiting_time/len(proc),
         'avg_response_time': total_response_time/len(proc),
         'avg_turnaround_time': total_turnaround_time/len(proc),
-        'processes': proc
+        'processes': proc,
+        'gantt': gantt
     }
 
 
@@ -68,6 +78,7 @@ def main():
     print("Avg Turnaround Time: {}".format(result['avg_turnaround_time']))
     print("Avg Response Time: {}".format(result['avg_response_time']))
     table.plot(result['processes'])
+    graph.plot_gantt(result['gantt'])
 
 
 if __name__ == '__main__':

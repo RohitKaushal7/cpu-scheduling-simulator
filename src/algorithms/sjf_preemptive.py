@@ -24,7 +24,7 @@ def run(processes):
 
         # Copy the burst time into rt[]
         for i in range(n):
-            rt[i] = processes[i].arrival_time
+            rt[i] = processes[i].burst_time
         complete = 0
         t = 0
         minm = 999999999
@@ -34,7 +34,6 @@ def run(processes):
         # Process until all processes gets
         # completed
         while (complete != n):
-
             # Find process with minimum remaining
             # time among the processes that
             # arrives till the current time`
@@ -44,14 +43,14 @@ def run(processes):
                     minm = rt[j]
                     short = j
                     check = True
-            if (check == False):
+            if (check == False): 
                 t += 1
                 continue
             else:
                 if(response[short] == False):
                     response[short] = True
-                    processes[short].response_time = t - \
-                        processes[short].arrival_time
+                    processes[short].response_time = t - processes[short].arrival_time
+            
             # Reduce remaining time by one
             rt[short] -= 1
 
@@ -85,7 +84,7 @@ def run(processes):
     def findTurnAroundTime(processes, n):
         processes[0].waiting_time = 0
         for i in range(n):
-            processes[i].turnaround_time = processes[i].arrival_time + \
+            processes[i].turnaround_time = processes[i].burst_time + \
                 processes[i].waiting_time
 
     # sort by arrival_time

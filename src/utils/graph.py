@@ -63,6 +63,24 @@ def plot_comparision(algorithms):
     plt.show()
 
 
+def plot_gantt(gantt):
+
+    fig, ax = plt.subplots()
+
+    ax.set_ylim(0, 30)
+    ax.set_yticks([30])
+    ax.set_yticklabels(['1'])
+    # ax.grid(True)
+
+    ax.broken_barh(list(map(lambda gnt: gnt[1], gantt)), (10, 10), facecolors=(
+        'tab:orange', 'tab:green', 'tab:red', 'tab:blue', 'tab:cyan', 'tab:brown', 'tab:grey', 'tab:pink'))
+    for gnt in gantt:
+        ax.annotate('P{}'.format(gnt[0]), (gnt[1][0],
+                                           15), color='white', fontweight='bold')
+
+    plt.show()
+
+
 def main():
     plot_algo_graph({'processes': processes})
 
