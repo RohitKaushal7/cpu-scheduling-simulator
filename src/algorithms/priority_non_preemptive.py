@@ -64,7 +64,7 @@ def run(processes):
     proc = sorted(proc, key=lambda proc: proc.arrival_time)
 
     return {
-        'name': 'PRIORITY-NP',
+        'name': 'PR-NP',
         'avg_waiting_time': total_waiting_time/len(proc),
         'avg_response_time': total_response_time/len(proc),
         'avg_turnaround_time': total_turnaround_time/len(proc),

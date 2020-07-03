@@ -44,8 +44,8 @@ def plot_comparision(algorithms):
     width = 0.15  # the width of the bars
 
     fig, ax = plt.subplots()
-    rects1 = ax.bar(x-width, avg_response_time,
-                    width, label='avg_response_time')
+    rects1 = ax.bar(x-width, avg_waiting_time,
+                    width, label='avg_waiting_time')
     rects2 = ax.bar(x, avg_turnaround_time,
                     width, label='avg_turnaround_time')
     rects3 = ax.bar(x+width, avg_response_time,
@@ -63,20 +63,53 @@ def plot_comparision(algorithms):
     plt.show()
 
 
+colors = [
+    "#ED4264",
+    "#13c191",
+    "#1FA2FF",
+    "#19d905",
+    "#fe53bb",
+    "#FFC837",
+    "#4776E6",
+    "#fdf200",
+    "#8E54E9",
+    "#fd0e30",
+    "#A6FFCB",
+    "#514A9D",
+    "#5eff0f",
+    "#1CD8D2",
+    "#FFEDBC",
+    "#cca4fd",
+    "#d1fe49",
+    "#00feca",
+    "#FF8008",
+    "#c2d302",
+    "#E00000", "#00E000", "#0000E0", "#E0E000", "#E000E0", "#00E0E0", "#E0E0E0",
+    "#800000", "#008000", "#000080", "#808000", "#800080", "#008080", "#808080",
+    "#C00000", "#00C000", "#0000C0", "#C0C000", "#C000C0", "#00C0C0", "#C0C0C0",
+    "#A00000", "#00A000", "#0000A0", "#A0A000", "#A000A0", "#00A0A0", "#A0A0A0",
+    "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#000000",
+    "#400000", "#004000", "#000040", "#404000", "#400040", "#004040", "#404040",
+    "#200000", "#002000", "#000020", "#202000", "#200020", "#002020", "#202020",
+    "#600000", "#006000", "#000060", "#606000", "#600060", "#006060", "#606060",
+]
+
+
 def plot_gantt(gantt):
 
-    fig, ax = plt.subplots()
-
+    fig, ax = plt.subplots(figsize=(15, 3))
     ax.set_ylim(0, 30)
-    ax.set_yticks([30])
+    ax.set_yticks([10])
     ax.set_yticklabels(['1'])
     # ax.grid(True)
 
-    ax.broken_barh(list(map(lambda gnt: gnt[1], gantt)), (10, 10), facecolors=(
-        'tab:orange', 'tab:green', 'tab:red', 'tab:blue', 'tab:cyan', 'tab:brown', 'tab:grey', 'tab:pink'))
+    ax.set_xticks(tuple(map(lambda gnt: gnt[1][0], gantt)))
+
+    ax.broken_barh(list(map(lambda gnt: gnt[1], gantt)), (0, 10), facecolors=tuple(map(
+        lambda gnt: colors[gnt[0]], gantt)))
     for gnt in gantt:
         ax.annotate('P{}'.format(gnt[0]), (gnt[1][0],
-                                           15), color='white', fontweight='bold')
+                                           5), color='white', fontweight='bold')
 
     plt.show()
 
