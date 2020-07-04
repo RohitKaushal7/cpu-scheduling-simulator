@@ -6,6 +6,7 @@ import src.utils.graph as graph
 
 def run(processes):
     # expects array of processes as arguments -> run the scheduling -> returns a dictionary/object of the result.
+    print('running fcfs...')
 
     gantt = []
 

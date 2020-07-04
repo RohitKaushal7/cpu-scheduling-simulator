@@ -11,20 +11,34 @@ import src.utils.table as table
 
 
 def main():
-    # fcfs.run(processes)
-    result_fcfs = fcfs.run(processes)
-    result_sjf = sjf.run(processes)
-    result_pr = priority.run(processes)
-    result_prp = priority_preemptive.run(processes)
-    result_srtf = srtf.run(processes)
-    result_srtf = srtf.run(processes)
-    # print(result_sjf)
-    # table.plot(result_sjf['processes'])
+    rs_fcfs = fcfs.run(processes)
+    rs_sjf = sjf.run(processes)
+    rs_pr = priority.run(processes)
+    rs_prp = priority_preemptive.run(processes)
+    rs_srtf = srtf.run(processes)
+
+    print('\n FCFS')
+    table.plot(rs_fcfs['processes'])
+    graph.plot_gantt(rs_fcfs['gantt'])
+
+    print('\n SJF')
+    table.plot(rs_sjf['processes'])
+    graph.plot_gantt(rs_sjf['gantt'])
+
+    print('\n PR')
+    table.plot(rs_pr['processes'])
+    graph.plot_gantt(rs_pr['gantt'])
+
+    print('\n PRP')
+    table.plot(rs_prp['processes'])
+    graph.plot_gantt(rs_prp['gantt'])
+
+    print('\n SRTF')
+    table.plot(rs_srtf['processes'])
+    graph.plot_gantt(rs_srtf['gantt'])
 
     graph.plot_comparision(
-        [result_fcfs, result_sjf, result_srtf, result_pr, result_prp])
-    # sjf.main()
-    # sjf_preemptive.main()
+        [rs_fcfs, rs_sjf, rs_srtf, rs_pr, rs_prp])
 
 
 if __name__ == '__main__':
