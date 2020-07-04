@@ -1,4 +1,12 @@
 def plot(processes):
+    """
+    Displays the given processes in a tabular format
+
+    Args:
+        processes (Array : :class:`src.utils.process.Process`): processed processes.
+
+    """
+
     print('| PID | BURST_TIME | ARRIVAL_TIME | PRIORITY || RESPONSE_TIME | WAITING_TIME | TURNAROUND_TIME | RETURN_TIME |')
 
     for p in processes:

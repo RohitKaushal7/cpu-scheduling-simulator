@@ -6,7 +6,13 @@ import copy
 
 
 def run(processes, quantum=3):
+    """
+        Round Robin
 
+        _
+    """
+
+    print('running round robin...')
     # initialize
     gantt = []
 
@@ -67,7 +73,6 @@ def run(processes, quantum=3):
                 i += 1
 
     for i in range(len(processes)):
-        print(processes[i].burst_time, processes_cpy[i].burst_time)
         processes[i].turnaround_time = processes[i].return_time - \
             processes[i].arrival_time
         processes[i].waiting_time = processes[i].turnaround_time - \

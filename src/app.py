@@ -12,6 +12,16 @@ import src.utils.table as table
 
 
 def main():
+    """
+    **Demo**
+        - This function runs sample (random) testcase with 7 process to demonstrate the app
+        - Plots the gantt chart for each algorithm
+        - Plots the comparision graph for different algorithms
+
+    **to Run Demo:**
+        - in the project root directory run ``python main.py``
+
+    """
     rs_fcfs = fcfs.run(processes)
     rs_sjf = sjf.run(processes)
     rs_pr = priority.run(processes)

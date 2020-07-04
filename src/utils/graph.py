@@ -4,6 +4,13 @@ from src.utils.tmp import processes
 
 
 def plot_algo_graph(result):
+    """
+    Plots the line graph for a particular scheduling algorithm.
+
+    Args:
+        result (``Dictionary``) : return value of any scheduling process.
+
+    """
     processes = result['processes']
 
     x_axis = list(map(lambda proc: proc.p_id, processes))
@@ -30,7 +37,13 @@ def plot_algo_graph(result):
 
 
 def plot_comparision(algorithms):
+    """
+    Plots the Comparison Bar graph for different scheduling algorithms.
 
+    Args:
+        result (``Array : Dictionary``) : Array of return values of any scheduling process.
+
+    """
     labels = list(map(lambda algo: algo['name'], algorithms))
 
     avg_waiting_time = list(
@@ -96,6 +109,13 @@ colors = [
 
 
 def plot_gantt(result):
+    """
+    Plots the Gantt Chart for a particular scheduling algorithm.
+
+    Args:
+        result (``Dictionary``) : return value of any scheduling process.
+
+    """
 
     gantt = result['gantt']
     fig, ax = plt.subplots(figsize=(15, 3))
