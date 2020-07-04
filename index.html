@@ -1,18 +1,19 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Welcome to CPU Scheduling Simulator’s documentation! &#8212; CPU Scheduling Simulator 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -39,21 +40,27 @@
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 <div class="section" id="module-src.app">
 <span id="demo"></span><h1>Demo<a class="headerlink" href="#module-src.app" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
+<dl class="function">
 <dt id="src.app.main">
-<code class="sig-prename descclassname">src.app.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/app.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.app.main" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt><strong>Demo</strong></dt><dd><ul class="simple">
-<li><p>Runs the sample (Random) testcases with 7 processes for all algorithms..</p></li>
-<li><p>for each algo plots the gantt chart and Table on the console with algo Name.</p></li>
-<li><p>plots the comparison for all those algorithms.</p></li>
+<code class="descclassname">src.app.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/app.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.app.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><strong>Demo</strong></dt>
+<dd><ul class="first last simple">
+<li>This function runs sample (random) testcase with 7 process to demonstrate the app</li>
+<li>Plots the gantt chart for each algorithm</li>
+<li>Plots the comparision graph for different algorithms</li>
+</ul>
+</dd>
+<dt><strong>to Run Demo:</strong></dt>
+<dd><ul class="first last simple">
+<li>in the project root directory run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">main.py</span></code></li>
 </ul>
 </dd>
 </dl>
@@ -62,24 +69,25 @@
 </div>
 <div class="section" id="process">
 <h1>Process<a class="headerlink" href="#process" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
+<dl class="class">
 <dt id="src.utils.process.Process">
-<em class="property">class </em><code class="sig-prename descclassname">src.utils.process.</code><code class="sig-name descname">Process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_id</span></em>, <em class="sig-param"><span class="n">arrival_time</span></em>, <em class="sig-param"><span class="n">burst_time</span></em>, <em class="sig-param"><span class="n">priority</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.process.Process" title="Permalink to this definition">¶</a></dt>
-<dd><p>Process are structured like this.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><ul class="simple">
-<li><p>p_id (int): Process Id.</p></li>
-<li><p>arrival_time (int): Time at which process arrived in ready queue.</p></li>
-<li><p>burst_time (int): Burst time of the process.</p></li>
-<li><p>priority (int): Process priority.</p></li>
+<em class="property">class </em><code class="descclassname">src.utils.process.</code><code class="descname">Process</code><span class="sig-paren">(</span><em>p_id</em>, <em>arrival_time</em>, <em>burst_time</em>, <em>priority=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.process.Process" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>p_id (int) : process ID</li>
+<li>arrival_time (int) : process Arriva time in ready queue</li>
+<li>burst_time (int) : Burst Time</li>
+<li>priority (int) : priority of the process , default: 1</li>
 </ul>
 </dd>
-<dt>Defaults::</dt><dd><ul class="simple">
-<li><p>self.waiting_time = 0</p></li>
-<li><p>self.return_time = 0</p></li>
-<li><p>self.turnaround_time = 0</p></li>
-<li><p>self.response_time = 0</p></li>
-<li><p>self.completed = False</p></li>
+<dt>Defaults:</dt>
+<dd><ul class="first last simple">
+<li>self.waiting_time = 0</li>
+<li>self.return_time = 0</li>
+<li>self.turnaround_time = 0</li>
+<li>self.response_time = 0</li>
+<li>self.completed = False</li>
 </ul>
 </dd>
 </dl>
@@ -89,12 +97,14 @@
 </div>
 <div class="section" id="scheduling-algorithms">
 <h1>Scheduling Algorithms<a class="headerlink" href="#scheduling-algorithms" title="Permalink to this headline">¶</a></h1>
-<dl>
-<dt>All the algorithms expects:</dt><dd><dl>
-<dt>Args:</dt><dd><p>processes (<a class="reference internal" href="#src.utils.process.Process" title="src.utils.process.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.utils.process.Process</span></code></a>):  An array of process to be scheduled.</p>
-</dd>
-<dt>Returns:</dt><dd><p>Dictionary.  the result of the scheduling:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<dl class="docutils">
+<dt>All the algorithms expects:</dt>
+<dd><dl class="first last docutils">
+<dt>Args:</dt>
+<dd>processes (<a class="reference internal" href="#src.utils.process.Process" title="src.utils.process.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.utils.process.Process</span></code></a>):  An array of process to be scheduled.</dd>
+<dt>Returns:</dt>
+<dd><p class="first">Dictionary.  the result of the scheduling:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Algo Name&#39;</span><span class="p">,</span>
    <span class="s1">&#39;avg_waiting_time&#39;</span><span class="p">:</span> <span class="n">total_waiting_time</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">proc</span><span class="p">),</span>
    <span class="s1">&#39;avg_response_time&#39;</span><span class="p">:</span> <span class="n">total_response_time</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">proc</span><span class="p">),</span>
@@ -110,50 +120,49 @@
 </dl>
 <div class="section" id="module-src.algorithms.fcfs">
 <span id="non-preemptive"></span><h2>Non Preemptive<a class="headerlink" href="#module-src.algorithms.fcfs" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
+<dl class="function">
 <dt id="src.algorithms.fcfs.run">
-<code class="sig-prename descclassname">src.algorithms.fcfs.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/fcfs.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.fcfs.run" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>First Come First Serve</em></p>
+<code class="descclassname">src.algorithms.fcfs.</code><code class="descname">run</code><span class="sig-paren">(</span><em>processes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/fcfs.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.fcfs.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>First Come First Serve</p>
 <p>_</p>
 </dd></dl>
 
-<span class="target" id="module-src.algorithms.sjf"></span><dl class="py function">
+<span class="target" id="module-src.algorithms.sjf"></span><dl class="function">
 <dt id="src.algorithms.sjf.run">
-<code class="sig-prename descclassname">src.algorithms.sjf.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/sjf.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.sjf.run" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Shortest Job First</em></p>
+<code class="descclassname">src.algorithms.sjf.</code><code class="descname">run</code><span class="sig-paren">(</span><em>processes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/sjf.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.sjf.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortest Job First</p>
 <p>_</p>
 </dd></dl>
 
-<span class="target" id="module-src.algorithms.priority"></span><dl class="py function">
+<span class="target" id="module-src.algorithms.priority"></span><dl class="function">
 <dt id="src.algorithms.priority.run">
-<code class="sig-prename descclassname">src.algorithms.priority.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/priority.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.priority.run" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Priority Scheduling</em></p>
+<code class="descclassname">src.algorithms.priority.</code><code class="descname">run</code><span class="sig-paren">(</span><em>processes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/priority.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.priority.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Priority Scheduling</p>
 <p>_</p>
 </dd></dl>
 
 </div>
 <div class="section" id="module-src.algorithms.srtf">
 <span id="preemptive"></span><h2>Preemptive<a class="headerlink" href="#module-src.algorithms.srtf" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-useful_1"></span><dl class="py function">
+<dl class="function">
 <dt id="src.algorithms.srtf.run">
-<code class="sig-prename descclassname">src.algorithms.srtf.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/srtf.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.srtf.run" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Shortest Remaining Time First</em></p>
+<code class="descclassname">src.algorithms.srtf.</code><code class="descname">run</code><span class="sig-paren">(</span><em>processes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/srtf.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.srtf.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortest Remaining Time First</p>
 <p>_</p>
 </dd></dl>
 
-<span class="target" id="module-src.algorithms.priority_preemptive"></span><dl class="py function">
+<span class="target" id="module-src.algorithms.priority_preemptive"></span><dl class="function">
 <dt id="src.algorithms.priority_preemptive.run">
-<code class="sig-prename descclassname">src.algorithms.priority_preemptive.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/priority_preemptive.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.priority_preemptive.run" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Priority Preemptive</em></p>
+<code class="descclassname">src.algorithms.priority_preemptive.</code><code class="descname">run</code><span class="sig-paren">(</span><em>processes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/priority_preemptive.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.priority_preemptive.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Priority Preemptive</p>
 <p>_</p>
 </dd></dl>
 
-<span class="target" id="module-src.algorithms.round_robin"></span><dl class="py function">
+<span class="target" id="module-src.algorithms.round_robin"></span><dl class="function">
 <dt id="src.algorithms.round_robin.run">
-<code class="sig-prename descclassname">src.algorithms.round_robin.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processes</span></em>, <em class="sig-param"><span class="n">quantum</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/round_robin.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.round_robin.run" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Round Robin</em></p>
-<p>_
-expects one more argument <em>quantum : the quantum value for round robin algo</em>.</p>
+<code class="descclassname">src.algorithms.round_robin.</code><code class="descname">run</code><span class="sig-paren">(</span><em>processes</em>, <em>quantum=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/algorithms/round_robin.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.algorithms.round_robin.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Round Robin</p>
+<p>_</p>
 </dd></dl>
 
 <p>_</p>
@@ -161,10 +170,14 @@ expects one more argument <em>quantum : the quantum value for round robin algo</
 </div>
 <div class="section" id="module-src.utils.table">
 <span id="tables"></span><h1>Tables<a class="headerlink" href="#module-src.utils.table" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
+<dl class="function">
 <dt id="src.utils.table.plot">
-<code class="sig-prename descclassname">src.utils.table.</code><code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/table.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.table.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expects an array of processes : [ … <a class="reference internal" href="#src.utils.process.Process" title="src.utils.process.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.utils.process.Process</span></code></a>] and displays it in the tabular format.</p>
+<code class="descclassname">src.utils.table.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>processes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/table.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.table.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the given processes in a tabular format</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>processes (Array : <a class="reference internal" href="#src.utils.process.Process" title="src.utils.process.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.utils.process.Process</span></code></a>): processed processes.</dd>
+</dl>
 </dd></dl>
 
 <p>_</p>
@@ -172,37 +185,34 @@ expects one more argument <em>quantum : the quantum value for round robin algo</
 <div class="section" id="graphs">
 <h1>Graphs<a class="headerlink" href="#graphs" title="Permalink to this headline">¶</a></h1>
 <p>Visual representation of Scheduling Algorithms</p>
-<span class="target" id="module-src.utils.graph"></span><dl class="py function">
+<span class="target" id="module-src.utils.graph"></span><dl class="function">
 <dt id="src.utils.graph.plot_algo_graph">
-<code class="sig-prename descclassname">src.utils.graph.</code><code class="sig-name descname">plot_algo_graph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/graph.html#plot_algo_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.graph.plot_algo_graph" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Plots a line graph for a particular scheduling algorithm.</em></p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>result (<code class="docutils literal notranslate"><span class="pre">Dictionary</span></code>) : result of a scheduling algorithm. (return value of <code class="docutils literal notranslate"><span class="pre">algorithm.run()</span></code>)</p>
-</dd>
+<code class="descclassname">src.utils.graph.</code><code class="descname">plot_algo_graph</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/graph.html#plot_algo_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.graph.plot_algo_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the line graph for a particular scheduling algorithm.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>result (<code class="docutils literal notranslate"><span class="pre">Dictionary</span></code>) : return value of any scheduling process.</dd>
 </dl>
-<p>_</p>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="src.utils.graph.plot_comparision">
-<code class="sig-prename descclassname">src.utils.graph.</code><code class="sig-name descname">plot_comparision</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">algorithms</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/graph.html#plot_comparision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.graph.plot_comparision" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Plots a bar graph comparing different scheduling algorithms.</em></p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>algorithms (<code class="docutils literal notranslate"><span class="pre">Array:</span> <span class="pre">Dictionary</span></code>) : Array of results of different scheduling algorithms. (return values of <code class="docutils literal notranslate"><span class="pre">algorithm.run()</span></code>)</p>
-</dd>
+<code class="descclassname">src.utils.graph.</code><code class="descname">plot_comparision</code><span class="sig-paren">(</span><em>algorithms</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/graph.html#plot_comparision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.graph.plot_comparision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the Comparison Bar graph for different scheduling algorithms.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>result (<code class="docutils literal notranslate"><span class="pre">Array</span> <span class="pre">:</span> <span class="pre">Dictionary</span></code>) : Array of return values of any scheduling process.</dd>
 </dl>
-<p>_</p>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="src.utils.graph.plot_gantt">
-<code class="sig-prename descclassname">src.utils.graph.</code><code class="sig-name descname">plot_gantt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/graph.html#plot_gantt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.graph.plot_gantt" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Plots a line graph for a particular scheduling algorithm.</em></p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>result (<code class="docutils literal notranslate"><span class="pre">Dictionary</span></code>) : Result of algo. (return value of <code class="docutils literal notranslate"><span class="pre">algorithm.run()</span></code> )</p>
-</dd>
+<code class="descclassname">src.utils.graph.</code><code class="descname">plot_gantt</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/utils/graph.html#plot_gantt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.utils.graph.plot_gantt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the Gantt Chart for a particular scheduling algorithm.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>result (<code class="docutils literal notranslate"><span class="pre">Dictionary</span></code>) : return value of any scheduling process.</dd>
 </dl>
-<p>_</p>
 </dd></dl>
 
 </div>
@@ -233,15 +243,17 @@ expects one more argument <em>quantum : the quantum value for round robin algo</
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
+  <h3>Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
@@ -258,7 +270,7 @@ expects one more argument <em>quantum : the quantum value for round robin algo</
       &copy;2020, Rohit Kaushal, Nishit Attrey, Vishal Shrivastava.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

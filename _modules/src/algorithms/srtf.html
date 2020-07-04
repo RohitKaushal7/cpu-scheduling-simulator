@@ -1,18 +1,19 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>src.algorithms.srtf &#8212; CPU Scheduling Simulator 0.1.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
    
@@ -33,21 +34,16 @@
             
   <h1>Source code for src.algorithms.srtf</h1><div class="highlight"><pre>
 <span></span><span class="c1"># when imported as module.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">.. module:: useful_1</span>
-<span class="sd">   :platform: Linux, Windows</span>
-<span class="sd">   :synopsis: Shortest Remaining Time First.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">src.utils.tmp</span> <span class="kn">import</span> <span class="n">processes</span>
+<span class="kn">from</span> <span class="nn">src.utils.tmp</span> <span class="k">import</span> <span class="n">processes</span>
 <span class="kn">import</span> <span class="nn">src.utils.table</span> <span class="k">as</span> <span class="nn">table</span>
 <span class="kn">import</span> <span class="nn">src.utils.graph</span> <span class="k">as</span> <span class="nn">graph</span>
 
 
 <div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../index.html#src.algorithms.srtf.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">processes</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    *Shortest Remaining Time First*</span>
+<span class="sd">        Shortest Remaining Time First</span>
 
-<span class="sd">    _</span>
+<span class="sd">        _</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;running srtf...&#39;</span><span class="p">)</span>
@@ -62,18 +58,15 @@
 
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
 
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">prev</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">response</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">findWaitingTime</span><span class="p">(</span><span class="n">processes</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 
         <span class="n">rt</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
-
-        <span class="n">ct</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># to count the time the process ran continously</span>
-        <span class="n">st</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># start time of that process</span>
 
         <span class="c1"># Copy the burst time into rt[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -83,6 +76,9 @@
         <span class="n">minm</span> <span class="o">=</span> <span class="mi">999999999</span>
         <span class="n">short</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">check</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">ct</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># to count the time the process ran continously</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># start time of that process</span>
 
         <span class="c1"># Process until all processes gets</span>
         <span class="c1"># completed</span>
@@ -99,6 +95,7 @@
                     <span class="n">short</span> <span class="o">=</span> <span class="n">j</span>
                     <span class="n">check</span> <span class="o">=</span> <span class="kc">True</span>
 
+            <span class="c1"># if a process is preempted</span>
             <span class="k">if</span> <span class="n">prev</span> <span class="o">!=</span> <span class="n">short</span><span class="p">:</span>
                 <span class="n">gantt</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">processes</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span><span class="o">.</span><span class="n">p_id</span><span class="p">,</span> <span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">ct</span><span class="p">)))</span>
                 <span class="n">ct</span> <span class="o">=</span> <span class="mi">1</span>
@@ -127,12 +124,12 @@
             <span class="c1"># executed</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">rt</span><span class="p">[</span><span class="n">short</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
 
-                <span class="k">if</span> <span class="n">prev</span> <span class="o">==</span> <span class="n">short</span><span class="p">:</span>
-                    <span class="n">gantt</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">processes</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span><span class="o">.</span><span class="n">p_id</span><span class="p">,</span> <span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">ct</span><span class="p">)))</span>
-
                 <span class="c1"># Increment complete</span>
                 <span class="n">complete</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">check</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="k">if</span> <span class="n">prev</span> <span class="o">==</span> <span class="n">short</span><span class="p">:</span>
+                    <span class="n">gantt</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">processes</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span><span class="o">.</span><span class="n">p_id</span><span class="p">,</span> <span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">ct</span><span class="p">)))</span>
 
                 <span class="c1"># Find finish time of current</span>
                 <span class="c1"># process</span>
@@ -227,15 +224,17 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
+  <h3>Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
@@ -252,7 +251,7 @@
       &copy;2020, Rohit Kaushal, Nishit Attrey, Vishal Shrivastava.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
