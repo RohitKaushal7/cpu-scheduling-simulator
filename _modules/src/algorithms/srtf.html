@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>src.algorithms.srtf &#8212; CPU Scheduling Simulator 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for src.algorithms.srtf</h1><div class="highlight"><pre>
+<span></span><span class="c1"># when imported as module.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: useful_1</span>
+<span class="sd">   :platform: Linux, Windows</span>
+<span class="sd">   :synopsis: Shortest Remaining Time First.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">src.utils.tmp</span> <span class="kn">import</span> <span class="n">processes</span>
+<span class="kn">import</span> <span class="nn">src.utils.table</span> <span class="k">as</span> <span class="nn">table</span>
+<span class="kn">import</span> <span class="nn">src.utils.graph</span> <span class="k">as</span> <span class="nn">graph</span>
+
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../index.html#src.algorithms.srtf.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">processes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    *Shortest Remaining Time First*</span>
+
+<span class="sd">    _</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;running srtf...&#39;</span><span class="p">)</span>
+
+    <span class="n">gantt</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># (,())</span>
+
+    <span class="c1"># initialize</span>
+    <span class="n">total_waiting_time</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_turnaround_time</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_response_time</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_return_time</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
+
+    <span class="n">prev</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">findWaitingTime</span><span class="p">(</span><span class="n">processes</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+
+        <span class="n">rt</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+
+        <span class="n">ct</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># to count the time the process ran continously</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># start time of that process</span>
+
+        <span class="c1"># Copy the burst time into rt[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">rt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">processes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">burst_time</span>
+        <span class="n">complete</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">minm</span> <span class="o">=</span> <span class="mi">999999999</span>
+        <span class="n">short</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Process until all processes gets</span>
+        <span class="c1"># completed</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">complete</span> <span class="o">!=</span> <span class="n">n</span><span class="p">):</span>
+            <span class="c1"># Find process with minimum remaining</span>
+            <span class="c1"># time among the processes that</span>
+            <span class="c1"># arrives till the current time`</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="n">short</span>
+
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">processes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">arrival_time</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">)</span> <span class="ow">and</span>
+                        <span class="p">(</span><span class="n">rt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">minm</span><span class="p">)</span> <span class="ow">and</span> <span class="n">rt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">minm</span> <span class="o">=</span> <span class="n">rt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">short</span> <span class="o">=</span> <span class="n">j</span>
+                    <span class="n">check</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">if</span> <span class="n">prev</span> <span class="o">!=</span> <span class="n">short</span><span class="p">:</span>
+                <span class="n">gantt</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">processes</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span><span class="o">.</span><span class="n">p_id</span><span class="p">,</span> <span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">ct</span><span class="p">)))</span>
+                <span class="n">ct</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">st</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ct</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">check</span> <span class="o">==</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="n">short</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">):</span>
+                    <span class="n">response</span><span class="p">[</span><span class="n">short</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">processes</span><span class="p">[</span><span class="n">short</span><span class="p">]</span><span class="o">.</span><span class="n">response_time</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> \
+                        <span class="n">processes</span><span class="p">[</span><span class="n">short</span><span class="p">]</span><span class="o">.</span><span class="n">arrival_time</span>
+
+            <span class="c1"># Reduce remaining time by one</span>
+            <span class="n">rt</span><span class="p">[</span><span class="n">short</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="c1"># Update minimum</span>
+            <span class="n">minm</span> <span class="o">=</span> <span class="n">rt</span><span class="p">[</span><span class="n">short</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">minm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">minm</span> <span class="o">=</span> <span class="mi">999999999</span>
+
+            <span class="c1"># If a process gets completely</span>
+            <span class="c1"># executed</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">rt</span><span class="p">[</span><span class="n">short</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+
+                <span class="k">if</span> <span class="n">prev</span> <span class="o">==</span> <span class="n">short</span><span class="p">:</span>
+                    <span class="n">gantt</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">processes</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span><span class="o">.</span><span class="n">p_id</span><span class="p">,</span> <span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">ct</span><span class="p">)))</span>
+
+                <span class="c1"># Increment complete</span>
+                <span class="n">complete</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">check</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="c1"># Find finish time of current</span>
+                <span class="c1"># process</span>
+                <span class="n">fint</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span>
+
+                <span class="c1"># Calculate waiting time</span>
+                <span class="n">processes</span><span class="p">[</span><span class="n">short</span><span class="p">]</span><span class="o">.</span><span class="n">waiting_time</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">fint</span> <span class="o">-</span> <span class="n">processes</span><span class="p">[</span><span class="n">short</span><span class="p">]</span><span class="o">.</span><span class="n">arrival_time</span> <span class="o">-</span> <span class="n">processes</span><span class="p">[</span><span class="n">short</span><span class="p">]</span><span class="o">.</span><span class="n">burst_time</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">processes</span><span class="p">[</span><span class="n">short</span><span class="p">]</span><span class="o">.</span><span class="n">waiting_time</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">processes</span><span class="p">[</span><span class="n">short</span><span class="p">]</span><span class="o">.</span><span class="n">waiting_time</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># Increment time</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">findTurnAroundTime</span><span class="p">(</span><span class="n">processes</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">processes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">waiting_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">processes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">turnaround_time</span> <span class="o">=</span> <span class="n">processes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">burst_time</span> <span class="o">+</span> \
+                <span class="n">processes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">waiting_time</span>
+
+    <span class="c1"># sort by arrival_time</span>
+    <span class="n">proc</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">processes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">proc</span><span class="p">:</span> <span class="n">proc</span><span class="o">.</span><span class="n">arrival_time</span><span class="p">)</span>
+
+    <span class="c1"># setting initial values</span>
+
+    <span class="n">findWaitingTime</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">gantt</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">processes</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span><span class="o">.</span><span class="n">p_id</span><span class="p">,</span> <span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">ct</span><span class="p">)))</span>
+
+    <span class="n">findTurnAroundTime</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">proc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">return_time</span> <span class="o">=</span> <span class="n">proc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">arrival_time</span> <span class="o">+</span> <span class="n">proc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">turnaround_time</span>
+
+    <span class="c1"># calculate for next processes</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">proc</span><span class="p">)):</span>
+
+        <span class="c1"># update total</span>
+        <span class="n">total_response_time</span> <span class="o">+=</span> <span class="n">proc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">response_time</span>
+        <span class="n">total_waiting_time</span> <span class="o">+=</span> <span class="n">proc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">waiting_time</span>
+        <span class="n">total_turnaround_time</span> <span class="o">+=</span> <span class="n">proc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">turnaround_time</span>
+        <span class="n">total_return_time</span> <span class="o">+=</span> <span class="n">proc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">burst_time</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;SRTF&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;avg_waiting_time&#39;</span><span class="p">:</span> <span class="n">total_waiting_time</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">proc</span><span class="p">),</span>
+        <span class="s1">&#39;avg_response_time&#39;</span><span class="p">:</span> <span class="n">total_response_time</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">proc</span><span class="p">),</span>
+        <span class="s1">&#39;avg_turnaround_time&#39;</span><span class="p">:</span> <span class="n">total_turnaround_time</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">proc</span><span class="p">),</span>
+        <span class="s1">&#39;processes&#39;</span><span class="p">:</span> <span class="n">proc</span><span class="p">,</span>
+        <span class="s1">&#39;gantt&#39;</span><span class="p">:</span> <span class="n">gantt</span>
+    <span class="p">}</span></div>
+
+
+<span class="c1"># If this file is executed directly -&gt; run temporary test-cases</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Avg Waiting Time: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;avg_waiting_time&#39;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Avg Turnaround Time: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;avg_turnaround_time&#39;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Avg Response Time: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;avg_response_time&#39;</span><span class="p">]))</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;processes&#39;</span><span class="p">])</span>
+    <span class="n">graph</span><span class="o">.</span><span class="n">plot_gantt</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">CPU Scheduling Simulator</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Rohit Kaushal, Nishit Attrey, Vishal Shrivastava.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>src.utils.process &#8212; CPU Scheduling Simulator 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for src.utils.process</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="Process"><a class="viewcode-back" href="../../../index.html#src.utils.process.Process">[docs]</a><span></span><span class="k">class</span> <span class="nc">Process</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Process are structured like this.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">           - p_id (int): Process Id.</span>
+<span class="sd">           - arrival_time (int): Time at which process arrived in ready queue.</span>
+<span class="sd">           - burst_time (int): Burst time of the process.</span>
+<span class="sd">           - priority (int): Process priority.</span>
+
+<span class="sd">        Defaults::</span>
+<span class="sd">            - self.waiting_time = 0</span>
+<span class="sd">            - self.return_time = 0</span>
+<span class="sd">            - self.turnaround_time = 0</span>
+<span class="sd">            - self.response_time = 0</span>
+<span class="sd">            - self.completed = False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_id</span><span class="p">,</span> <span class="n">arrival_time</span><span class="p">,</span> <span class="n">burst_time</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_id</span> <span class="o">=</span> <span class="n">p_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arrival_time</span> <span class="o">=</span> <span class="n">arrival_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">burst_time</span> <span class="o">=</span> <span class="n">burst_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">priority</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">waiting_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">turnaround_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">completed</span> <span class="o">=</span> <span class="kc">False</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">CPU Scheduling Simulator</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Rohit Kaushal, Nishit Attrey, Vishal Shrivastava.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
