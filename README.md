@@ -1,6 +1,17 @@
 # CPU-Scheduling-Simulator
 Python project to simulate cpu-scheduling
 
+### Documentaion
+[See Project Documentation Here](http://rohitkaushal7.github.io/cpu-scheduling-simulator/)
+
+### Up and Running
+To run the project
+- install dependencies.
+    - `pip install -e .` (if in virtual environment)
+    - `python setup.py install` (otherwise)
+- in the project root directory run
+        `python main.py`
+
 ### developing
 1. Clone the project
     - `git clone https://github.com/RohitKaushal7/cpu-scheduling-simulator.git`
