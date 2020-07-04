@@ -20,6 +20,8 @@ def run(processes):
     n = len(processes)
 
     response = []
+    prev, st, ct = 0, 0, 0
+
     for i in range(n):
         response.append(False)
 
@@ -36,18 +38,32 @@ def run(processes):
         short = 0
         check = False
 
+        ct = 1  # to count the time the process ran continously
+        st = 0  # start time of that process
+
         # Process until all processes gets
         # completed
         while (complete != n):
             # Find process with minimum remaining
             # time among the processes that
             # arrives till the current time`
+            prev = short
+
             for j in range(n):
                 if ((processes[j].arrival_time <= t) and
                         (rt[j] < minm) and rt[j] > 0):
                     minm = rt[j]
                     short = j
                     check = True
+
+            # if a process is preempted
+            if prev != short:
+                gantt.append((processes[prev].p_id, (st, ct)))
+                ct = 1
+                st = t
+            else:
+                ct += 1
+
             if (check == False):
                 t += 1
                 continue
@@ -72,6 +88,9 @@ def run(processes):
                 # Increment complete
                 complete += 1
                 check = False
+
+                if prev == short:
+                    gantt.append((processes[prev].p_id, (st, ct)))
 
                 # Find finish time of current
                 # process
@@ -99,6 +118,7 @@ def run(processes):
     # setting initial values
 
     findWaitingTime(proc, n)
+    gantt.append((processes[prev].p_id, (st, ct)))
 
     findTurnAroundTime(proc, n)
 
@@ -131,7 +151,7 @@ def main():
     print("Avg Turnaround Time: {}".format(result['avg_turnaround_time']))
     print("Avg Response Time: {}".format(result['avg_response_time']))
     table.plot(result['processes'])
-    graph.plot_gantt(result['gantt'])
+    graph.plot_gantt(result)
 
 
 if __name__ == '__main__':

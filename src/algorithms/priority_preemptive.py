@@ -135,8 +135,7 @@ def main():
     print("Avg Turnaround Time: {}".format(result['avg_turnaround_time']))
     print("Avg Response Time: {}".format(result['avg_response_time']))
     table.plot(result['processes'])
-    print(result['gantt'])
-    graph.plot_gantt(result['gantt'])
+    graph.plot_gantt(result)
 
 
 if __name__ == '__main__':

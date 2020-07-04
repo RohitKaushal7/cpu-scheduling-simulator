@@ -59,7 +59,7 @@ def plot_comparision(algorithms):
     ax.legend()
 
     # fig.tight_layout()
-
+    plt.title('Comparison of different Scheduling Algorithms')
     plt.show()
 
 
@@ -95,8 +95,9 @@ colors = [
 ]
 
 
-def plot_gantt(gantt):
+def plot_gantt(result):
 
+    gantt = result['gantt']
     fig, ax = plt.subplots(figsize=(15, 3))
     ax.set_ylim(0, 30)
     ax.set_yticks([10])
@@ -110,7 +111,7 @@ def plot_gantt(gantt):
     for gnt in gantt:
         ax.annotate('P{}'.format(gnt[0]), (gnt[1][0],
                                            5), color='white', fontweight='bold')
-
+    plt.title(result['name'])
     plt.show()
 
 
