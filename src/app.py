@@ -19,6 +19,16 @@ def main():
         - Plots the comparision graph for different algorithms
 
     **to Run Demo:**
+        - unzip the project.
+        - In the project base directory 
+            - configure Python virtual Environment.
+                - create virtual env : ``python3 -m venv env``
+                - switch to environment.
+                    - Linux : ``source env/bin/activate``
+                    - Win : run the `activate` script in cmd at ``env/sources/activate`` and then change back to the root directory.
+            - install dependencies 
+                - ``pip install -e .``
+
         - in the project root directory run ``python main.py``
 
     """

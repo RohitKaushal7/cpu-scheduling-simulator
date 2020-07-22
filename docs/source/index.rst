@@ -26,6 +26,22 @@ Demo
 .. automodule:: src.app
    :members:
 
+.. image:: /images/fcfs.png
+    :alt: FCFS
+.. image:: /images/sjf.png
+    :alt: Shortest Remaining Time First
+.. image:: /images/pr-np.png
+    :alt: Priority Non-Preemptive
+.. image:: /images/pr-p.png
+    :alt: Priority Preemptive
+.. image:: /images/srtf.png
+    :alt: Shortest Remaining Time First
+.. image:: /images/round-rbn.png
+    :alt: Round Robin
+
+.. image:: /images/comp.png
+    :alt: Comparison of Scheduling Algorithms
+
 
 Process 
 ===========
