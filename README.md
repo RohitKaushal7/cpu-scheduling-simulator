@@ -26,3 +26,8 @@ To run the project
 4.  install dependencies and setup tools. `pip install -e .` 
 
 5. Do stuff.
+## Contributors
+
+- [Rohit Kaushal](https://www.github.com/RohitKaushal7) <br>
+- [Nishit Attrey](https://www.github.com/NishitAttrey) <br>
+- [Vishal Shrivastava](https://www.github.com/vishalshrivastava16) <br>
